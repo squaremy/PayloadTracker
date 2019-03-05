@@ -4,6 +4,7 @@
 
 SoftwareSerial serial_connection(10, 11); //RX=pin 10, TX=pin 11
 TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
+
 void setup()
 {
   Serial.begin(9600);//This opens up communications to the Serial monitor in the Arduino IDE
