@@ -30,7 +30,7 @@ void loop()
     Serial.println("Speed MPH:");
     Serial.println(gps.speed.mph());
     Serial.println("Altitude Feet:");
-    Serial.println(gps.altitude.feet());
+    Serial.println(gps.altitude.meters());
     Serial.println("");
   }
 }
