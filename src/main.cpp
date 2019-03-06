@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
+#include <string.h>
 
-SoftwareSerial serial_connection(10, 11); //RX=pin 10, TX=pin 11
+SoftwareSerial serial_connection(10, 11); //RX=pin 10, TX=pin 11 (for arduino... connect TX to RX and vice-versa)
 TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
 
 void setup()
