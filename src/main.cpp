@@ -1,8 +1,15 @@
 #include <Arduino.h>
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
-#include <string.h>
 
+/**
+ * Program: Rocket Payload
+ * Version: 0.1
+ * Date: 6 March 2019
+ * Description: Tester for rocket payloads. Also program to develop payload code.
+ * Last edited by: Jordan Martin
+ * Reason edited: Code documentation
+ */
 SoftwareSerial serial_connection(10, 11); //RX=pin 10, TX=pin 11 (for arduino... connect TX to RX and vice-versa)
 TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
 
