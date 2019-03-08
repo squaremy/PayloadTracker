@@ -10,7 +10,7 @@
  * Last edited by: Jordan Martin
  * Reason edited: Code documentation
  */
-SoftwareSerial serial_connection(10, 11); //RX=pin 10, TX=pin 11 (for arduino... connect TX to RX and vice-versa)
+SoftwareSerial serial_connection(3, 2); //RX=pin 10, TX=pin 11 (for arduino... connect TX to RX and vice-versa)
 TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
 
 void setup()
