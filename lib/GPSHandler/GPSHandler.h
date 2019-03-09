@@ -20,11 +20,10 @@ public:
   };
   GPSHandler(HardwareSerial *serial);
   int update();
-  int getLocation(GPSData *gpsData);
-  int getAltitude(GPSData *gpsData);
+  int getGPSData(GPSData *gpsData);
 private:
   int parseData(String toParse, GPSData *parsedData);
-  int DMStoDecimal(float dms);
+  int DMtoDecimal(float dm);
   bool dataGood = false;
   long timeAtLastUpdate = 0;
   BetterSerial gpsSerial;
