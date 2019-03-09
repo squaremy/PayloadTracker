@@ -1,11 +1,20 @@
 #include <GPSHandler.h>
 
-
-GPSHandler::GPSHandler(HardwareSerial *serial) {
+/**
+ * Library: GPSHandler
+ * Author: Jordan Martin
+ * Version: 1.0
+ * Date Created: 9 Mar 2019
+ * Description: A custom library to help in parsing raw GPS data
+ * Last Edited By: Jordan Martin
+ * Date Edited: 9 Mar 2019
+ * Reason Edited: creation of library and code documentation
+ */
+GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
   gpsSerial.begin(serial, 9600);
 }
 
-int GPSHandler::update() {
+int GPSHandler::update() { // update gps data if available
   int updates = 0;
   GPSData tempData;
   while(gpsSerial.readLine(&rawData)) {
@@ -23,15 +32,15 @@ int GPSHandler::update() {
   return NO_NEW_DATA;
 }
 
-int GPSHandler::getGPSData(GPSData *gpsData) {
+int GPSHandler::getGPSData(GPSData *gpsData) { // obtain current gps data
   if(!dataGood) return -1;
   *gpsData = curGPSData;
   return 0;
 }
 
-int GPSHandler::parseData(String toParse, GPSData *parsedData) {
+int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw data
   if(toParse.indexOf("$GPGGA") == -1) return -1;
-  int commaIndicies[13];
+  int commaIndicies[13]; // keep track of the data divisions (where the commas are)
   commaIndicies[0] = toParse.indexOf(",");
   for(int i = 1; i < 13; i++) {
     commaIndicies[i] = toParse.indexOf(",", commaIndicies[i-1]+1);
@@ -58,7 +67,7 @@ int GPSHandler::parseData(String toParse, GPSData *parsedData) {
   return 0;
 }
 
-int GPSHandler::DMtoDecimal(float dm) {
+int GPSHandler::DMtoDecimal(float dm) { // convert gps lat and lng data to degrees
   float deg = atof(String(dm).substring(0, 2).c_str());
   float min = atof(String(dm).substring(2, String(dm).length()).c_str());
   return (deg + (min/60.0));
