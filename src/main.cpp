@@ -16,7 +16,6 @@
  */
 // SoftwareSerial serial_connection(3, 2); //RX=pin 11, TX=pin 10 (for arduino... connect TX to RX and vice-versa)
 // TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
-
 GPSHandler gps(&Serial);
 GPSHandler::GPSData gpsDat;
 RF24 radio(9, 10);
