@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <TinyGPS++.h>
-#include <SoftwareSerial.h>
+// #include <TinyGPS++.h>
+// #include <SoftwareSerial.h>
 #include <RF24.h>
-#include <GPSHandler.h>
+// #include <GPSHandler.h>
 
 /**
  * Program: Rocket Payload
@@ -11,13 +11,13 @@
  * Date Created: 5 March 2019
  * Description: Tester for rocket payloads. Also program to develop payload code.
  * Last Edited by: Jordan Martin
- * Last Edited: 9 March 2019
- * Reason edited: Swiched to custom gps handler
+ * Last Edited: 10 March 2019
+ * Reason edited: Testing radio with 10 uF capacitors...
  */
 // SoftwareSerial serial_connection(3, 2); //RX=pin 11, TX=pin 10 (for arduino... connect TX to RX and vice-versa)
 // TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
-GPSHandler gps(&Serial);
-GPSHandler::GPSData gpsDat;
+// GPSHandler gps(&Serial);
+// GPSHandler::GPSData gpsDat;
 RF24 radio(9, 10);
 const byte address[6] = "00001";
 void setup()
@@ -35,12 +35,13 @@ void loop()
 {
   // ------------TESTING CODE-------------------
   float x = 12.2, y = 17.8;
-  String blah = String(x, 3) + ", " + String(y, 3);
+  String blah = String(x, sizeof(x)/sizeof(float)) + "," + String(y, sizeof(y)/sizeof(float)) + "";
   char toWrite[blah.length()];
   for(int i = 0; i < (int)blah.length(); i++) {
     toWrite[i] = blah.charAt(i);
   }
   radio.write(&toWrite, sizeof(toWrite));
+  Serial.println(toWrite);
   delay(1000);
   // -------------END TESTING CODE--------------
   // while(serial_connection.available())//While there are characters to come from the GPS
@@ -61,13 +62,14 @@ void loop()
     // Serial.println("Altitude Meters:");
     // Serial.println(gps.altitude.meters());
     // Serial.println("");
+
     // compile and send location data
-    gps.getGPSData(&gpsDat);
-    String temp = String(gpsDat.latitude, 6) + ", " + String(gpsDat.longitude, 6); // compile into string to be used later
-    char location[temp.length()]; // create location character array
-    for(int i = 0; i < (int)temp.length(); i++) { // go through each piece of the string data
-      location[i] = temp.charAt(i); // add current piece of string to char array
-    }
-    radio.write(&location, sizeof(location)); // send location data to receiver through the radio
+    // gps.getGPSData(&gpsDat);
+    // String temp = String(gpsDat.latitude, 6) + ", " + String(gpsDat.longitude, 6); // compile into string to be used later
+    // char location[temp.length()]; // create location character array
+    // for(int i = 0; i < (int)temp.length(); i++) { // go through each piece of the string data
+    //   location[i] = temp.charAt(i); // add current piece of string to char array
+    // }
+    // radio.write(&location, sizeof(location)); // send location data to receiver through the radio
   // }
 }
