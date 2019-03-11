@@ -2,6 +2,7 @@
 // #include <TinyGPS++.h>
 // #include <SoftwareSerial.h>
 #include <RF24.h>
+#include <SD.h>
 // #include <GPSHandler.h>
 
 /**
@@ -11,8 +12,8 @@
  * Date Created: 5 March 2019
  * Description: Tester for rocket payloads. Also program to develop payload code.
  * Last Edited by: Jordan Martin
- * Last Edited: 10 March 2019
- * Reason edited: Testing radio with 10 uF capacitors...
+ * Last Edited: 11 March 2019
+ * Reason edited: Adding SD card and 10 uF capacitors...
  */
 // SoftwareSerial serial_connection(3, 2); //RX=pin 11, TX=pin 10 (for arduino... connect TX to RX and vice-versa)
 // TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
