@@ -10,8 +10,8 @@
  * Date Created: 9 Mar 2019
  * Description: A custom library to help in parsing raw GPS data
  * Last Edited By: Jordan Martin
- * Date Edited: 9 Mar 2019
- * Reason Edited: creation of library and code documentation
+ * Date Edited: 11 Mar 2019
+ * Reason Edited: Added getRawData()
  */
 #define GPS_FIXED 1
 #define GPS_NOT_FIXED 0
@@ -31,6 +31,7 @@ public:
   GPSHandler(HardwareSerial *serial); // constructor
   int update(); // updates gps data if available
   int getGPSData(GPSData *gpsData); // obtains and parses gps data
+  int getRawData(String *data); // gets raw gps data
 private:
   int parseData(String toParse, GPSData *parsedData); // parses gps data
   int DMtoDecimal(float dm); // converts gps lat and lng from DDMM.MMMM (degMin.Min) to degrees

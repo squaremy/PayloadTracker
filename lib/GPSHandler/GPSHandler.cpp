@@ -7,8 +7,8 @@
  * Date Created: 9 Mar 2019
  * Description: A custom library to help in parsing raw GPS data
  * Last Edited By: Jordan Martin
- * Date Edited: 9 Mar 2019
- * Reason Edited: creation of library and code documentation
+ * Date Edited: 11 Mar 2019
+ * Reason Edited: Added getRawData()
  */
 GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
   gpsSerial.begin(serial, 9600);
@@ -36,6 +36,10 @@ int GPSHandler::getGPSData(GPSData *gpsData) { // obtain current gps data
   if(!dataGood) return -1;
   *gpsData = curGPSData;
   return 0;
+}
+
+int GPSHandler::getRawData(String *data) {
+  return rawData;
 }
 
 int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw data

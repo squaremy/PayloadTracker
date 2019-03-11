@@ -17,6 +17,7 @@
  */
 // SoftwareSerial serial_connection(3, 2); //RX=pin 11, TX=pin 10 (for arduino... connect TX to RX and vice-versa)
 // TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data
+// File dataFile;
 // GPSHandler gps(&Serial);
 // GPSHandler::GPSData gpsDat;
 RF24 radio(9, 10);
@@ -29,6 +30,7 @@ void setup()
   radio.openWritingPipe(address); // start radio on certain address
   radio.setPALevel(RF24_PA_MIN); // sets power amplifier level
   radio.stopListening(); // stop looking for messages (this radio isn't intended to receive messages yet)
+  // dataFile = SD.open("GPSDAT.txt", FILE_WRITE);
   Serial.println("GPS Start");//Just show to the monitor that the sketch has started
 }
 
@@ -36,8 +38,8 @@ void loop()
 {
   // ------------TESTING CODE-------------------
   float x = 12.2, y = 17.8;
-  String blah = String(x, sizeof(x)/sizeof(float)) + "," + String(y, sizeof(y)/sizeof(float)) + "";
-  char toWrite[blah.length()];
+  String blah = String(x, sizeof(x)/sizeof(float)) + "," + String(y, sizeof(y)/sizeof(float));
+  char toWrite[blah.length()+1] = "";
   for(int i = 0; i < (int)blah.length(); i++) {
     toWrite[i] = blah.charAt(i);
   }
@@ -72,5 +74,6 @@ void loop()
     //   location[i] = temp.charAt(i); // add current piece of string to char array
     // }
     // radio.write(&location, sizeof(location)); // send location data to receiver through the radio
+    // dataFile.println(gps.getRawData());
   // }
 }
