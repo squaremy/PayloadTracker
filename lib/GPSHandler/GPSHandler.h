@@ -34,7 +34,7 @@ public:
   int getRawData(String *data); // gets raw gps data
 private:
   int parseData(String toParse, GPSData *parsedData); // parses gps data
-  int DMtoDecimal(float dm); // converts gps lat and lng from DDMM.MMMM (degMin.Min) to degrees
+  int DMtoDecimal(String dm); // converts gps lat and lng from DDMM.MMMM (degMin.Min) to degrees
   bool dataGood = false;
   long timeAtLastUpdate = 0;
   BetterSerial gpsSerial;

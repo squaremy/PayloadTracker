@@ -7,8 +7,8 @@
  * Date Created: 9 Mar 2019
  * Description: A custom library to help in parsing raw GPS data
  * Last Edited By: Jordan Martin
- * Date Edited: 11 Mar 2019
- * Reason Edited: Fixed update logig -- to test still
+ * Date Edited: 12 Mar 2019
+ * Reason Edited: Testing...
  */
 GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
   gpsSerial.begin(serial, 9600);
@@ -58,8 +58,8 @@ int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw da
   else lngDir = -1;
   parsedData->timestamp = atol(toParse.substring(commaIndicies[0]+1, commaIndicies[1]).c_str());
   parsedData->altitude = atof(toParse.substring(commaIndicies[8]+1, commaIndicies[9]).c_str());
-  parsedData->latitude = DMtoDecimal(atof(toParse.substring(commaIndicies[1]+1, commaIndicies[2]).c_str())) * latDir;
-  parsedData->longitude = DMtoDecimal(atof(toParse.substring(commaIndicies[3]+1, commaIndicies[4]).c_str())) * lngDir;
+  parsedData->latitude = DMtoDecimal(toParse.substring(commaIndicies[1]+1, commaIndicies[2]).c_str()) * latDir;
+  parsedData->longitude = DMtoDecimal(toParse.substring(commaIndicies[3]+1, commaIndicies[4]).c_str()) * lngDir;
   parsedData->satellites = atoi(toParse.substring(commaIndicies[6]+1, commaIndicies[7]).c_str());
   switch(atoi(toParse.substring(commaIndicies[5]+1, commaIndicies[6]).c_str())) {
     case 1:
@@ -72,8 +72,8 @@ int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw da
   return 0;
 }
 
-int GPSHandler::DMtoDecimal(float dm) { // convert gps lat and lng data to degrees
-  float deg = atof(String(dm).substring(0, 2).c_str());
-  float min = atof(String(dm).substring(2, String(dm).length()).c_str());
+int GPSHandler::DMtoDecimal(String dm) { // convert gps lat and lng data to degrees
+  float deg = atof(dm.substring(0, dm.indexOf(".")-2).c_str());
+  float min = atof(dm.substring(2, dm.length()).c_str());
   return (deg + (min/60.0));
 }
