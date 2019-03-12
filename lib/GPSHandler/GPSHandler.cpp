@@ -17,7 +17,7 @@ GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
 int GPSHandler::update() { // update gps data if available
   int updates = 0;
   GPSData tempData;
-  while(gpsSerial.readLine(&rawData)) {
+  while(gpsSerial.readLine(&rawData) == 0) {
     updates++;
     if(parseData(rawData, &tempData) == 0) {
       if(!dataGood) dataGood = true;
