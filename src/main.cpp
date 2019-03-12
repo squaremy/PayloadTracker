@@ -14,7 +14,7 @@
  * Description: Tester for rocket payloads. Also program to develop payload code.
  * Last Edited by: Jordan Martin
  * Last Edited: 11 March 2019
- * Reason edited: Adding SD card and 10 uF capacitors...
+ * Reason edited: Changed how to deal with gps handler -- to test still, need to test sd card as well
  */
 SoftwareSerial serial_connection(3, 2); //RX=pin 11, TX=pin 10 (for arduino... connect TX to RX and vice-versa)
 TinyGPSPlus gps;//This is the GPS object that will pretty much do all the grunt work with the NMEA data

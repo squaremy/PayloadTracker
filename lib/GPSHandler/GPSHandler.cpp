@@ -8,7 +8,7 @@
  * Description: A custom library to help in parsing raw GPS data
  * Last Edited By: Jordan Martin
  * Date Edited: 11 Mar 2019
- * Reason Edited: Added getRawData()
+ * Reason Edited: Fixed update logig -- to test still
  */
 GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
   gpsSerial.begin(serial, 9600);
