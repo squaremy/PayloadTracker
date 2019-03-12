@@ -39,7 +39,8 @@ int GPSHandler::getGPSData(GPSData *gpsData) { // obtain current gps data
 }
 
 int GPSHandler::getRawData(String *data) {
-  return rawData;
+  *data = rawData;
+  return 0;
 }
 
 int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw data
