@@ -7,8 +7,8 @@
  * Date Created: 9 Mar 2019
  * Description: A custom library to help in parsing raw GPS data
  * Last Edited By: Jordan Martin
- * Date Edited: 12 Mar 2019
- * Reason Edited: Testing...
+ * Date Edited: 25 Mar 2019
+ * Reason Edited: Fixed DMtoDecimal (wasn't of type float)
  */
 GPSHandler::GPSHandler(HardwareSerial *serial) { // set up gps communication
   gpsSerial.begin(serial, 9600);
@@ -52,14 +52,14 @@ int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw da
     if(commaIndicies[i] < 0 || commaIndicies[i] >= (int)toParse.length()) return -1;
   }
   int latDir, lngDir;
-  if(strcmp(toParse.substring(commaIndicies[2]+1, commaIndicies[3]).c_str(), "N")) latDir = 1;
+  if(strcmp(toParse.substring(commaIndicies[2]+1, commaIndicies[3]).c_str(), "N") == 0) latDir = 1;
   else latDir = -1;
-  if(strcmp(toParse.substring(commaIndicies[4]+1, commaIndicies[5]).c_str(), "E")) lngDir = 1;
+  if(strcmp(toParse.substring(commaIndicies[4]+1, commaIndicies[5]).c_str(), "E") == 0) lngDir = 1;
   else lngDir = -1;
   parsedData->timestamp = atol(toParse.substring(commaIndicies[0]+1, commaIndicies[1]).c_str());
   parsedData->altitude = atof(toParse.substring(commaIndicies[8]+1, commaIndicies[9]).c_str());
-  parsedData->latitude = DMtoDecimal(toParse.substring(commaIndicies[1]+1, commaIndicies[2]).c_str()) * latDir;
-  parsedData->longitude = DMtoDecimal(toParse.substring(commaIndicies[3]+1, commaIndicies[4]).c_str()) * lngDir;
+  parsedData->latitude = DMtoDecimal(toParse.substring(commaIndicies[1]+1, commaIndicies[2]).c_str()) * (latDir);
+  parsedData->longitude = DMtoDecimal(toParse.substring(commaIndicies[3]+1, commaIndicies[4]).c_str()) * (lngDir);
   parsedData->satellites = atoi(toParse.substring(commaIndicies[6]+1, commaIndicies[7]).c_str());
   switch(atoi(toParse.substring(commaIndicies[5]+1, commaIndicies[6]).c_str())) {
     case 1:
@@ -72,8 +72,9 @@ int GPSHandler::parseData(String toParse, GPSData *parsedData) { // parse raw da
   return 0;
 }
 
-int GPSHandler::DMtoDecimal(String dm) { // convert gps lat and lng data to degrees
+float GPSHandler::DMtoDecimal(String dm) { // convert gps lat and lng data to degrees
   float deg = atof(dm.substring(0, dm.indexOf(".")-2).c_str());
-  float min = atof(dm.substring(2, dm.length()).c_str());
-  return (deg + (min/60.0));
+  float min = atof(dm.substring(dm.indexOf(".")-2, dm.length()).c_str());
+  float decimal = deg + (min/60);
+  return decimal;
 }
