@@ -166,6 +166,7 @@ static uint8_t chip_select_asserted = 0;
 
 void Sd2Card::chipSelectHigh(void) {
   digitalWrite(chipSelectPin_, HIGH);
+  spiSend(0xFF);
 #ifdef USE_SPI_LIB
   if (chip_select_asserted) {
     chip_select_asserted = 0;
