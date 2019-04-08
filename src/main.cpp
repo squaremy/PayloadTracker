@@ -15,7 +15,7 @@
  * Description: Tester for rocket payloads. Also program to develop payload code.
  * Last Edited by: Jordan Martin
  * Last Edited: 2 April 2019
- * Reason edited: Fixing SPI devices
+ * Reason edited: Fixing SPI devices - NOTE: SD module has a defect... CS pin should be connected to pin 13 on the level shifter OR use different SPI pins for SD module
  */
 GPSHandler gps(&Serial);
 GPSHandler::GPSData gpsDat;
