@@ -8,7 +8,7 @@
 // /**
 //  * Program: Rocket Payload
 //  * Author: Jordan Martin
-//  * Version: 1.0
+//  * Version: 1.1
 //  * Date Created: 5 March 2019
 //  * Description: Tester for rocket payloads. Also program to develop payload code.
 //  * Last Edited by: Jordan Martin
